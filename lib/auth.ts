@@ -5,7 +5,13 @@ import { getChatGPTUser, type ChatGPTUser } from "../app/chatgpt-auth";
 
 const COOKIE = "heartbox_session";
 const SESSION_AGE = 30 * 24 * 60 * 60 * 1000;
-const ITERATIONS = 310_000;
+// Workers caps each PBKDF2 call at 100,000 iterations. Chain three rounds.
+const ITERATIONS = 100_000;
+const ROUNDS = 3;
+
+export class AuthError extends Error {
+  constructor(message: string, public status = 400) { super(message); }
+}
 
 export type CurrentUser = ChatGPTUser & { authKind: "local" | "chatgpt" };
 type Account = { id: string; username: string; displayName: string; passwordHash: string; passwordSalt: string };
@@ -19,9 +25,14 @@ async function sha256(value: string) {
 }
 
 async function passwordHash(password: string, salt: string) {
-  const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(password), "PBKDF2", false, ["deriveBits"]);
-  const bits = await crypto.subtle.deriveBits({ name: "PBKDF2", salt: hexToBytes(salt), iterations: ITERATIONS, hash: "SHA-256" }, key, 256);
-  return bytesToHex(new Uint8Array(bits));
+  let secret = new TextEncoder().encode(password);
+  const saltBytes = hexToBytes(salt);
+  for (let round = 0; round < ROUNDS; round++) {
+    const key = await crypto.subtle.importKey("raw", secret, "PBKDF2", false, ["deriveBits"]);
+    const bits = await crypto.subtle.deriveBits({ name: "PBKDF2", salt: new Uint8Array([...saltBytes, round]), iterations: ITERATIONS, hash: "SHA-256" }, key, 256);
+    secret = new Uint8Array(bits);
+  }
+  return bytesToHex(secret);
 }
 
 function sameHash(a: string, b: string) {
@@ -33,13 +44,13 @@ function sameHash(a: string, b: string) {
 
 export function normalizeUsername(value: unknown) {
   const username = typeof value === "string" ? value.trim().normalize("NFKC").toLowerCase() : "";
-  if (!/^[\p{L}\p{N}_-]{3,24}$/u.test(username)) throw new Error("用户名需为 3–24 位文字、数字、- 或 _");
+  if (!/^[\p{L}\p{N}_-]{3,24}$/u.test(username)) throw new AuthError("用户名需为 3–24 位文字、数字、- 或 _");
   return username;
 }
 
 export function validatePassword(value: unknown) {
   if (typeof value !== "string" || value.length < 10 || value.length > 128) {
-    throw new Error("密码需为 10–128 位");
+    throw new AuthError("密码需为 10–128 位");
   }
   return value;
 }
@@ -74,8 +85,11 @@ export async function createAccount(username: string, password: string, existing
   try {
     await db().prepare(`INSERT INTO accounts (id, username, display_name, password_hash, password_salt, created_at)
       VALUES (?, ?, ?, ?, ?, ?)`).bind(id, username, displayName, hash, salt, Date.now()).run();
-  } catch {
-    throw new Error("用户名已被使用，或此账号已设置独立登录");
+  } catch (error) {
+    if (error instanceof Error && /UNIQUE constraint failed/i.test(error.message)) {
+      throw new AuthError("用户名已被使用，或此账号已设置独立登录", 409);
+    }
+    throw error;
   }
   return id;
 }

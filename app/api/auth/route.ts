@@ -1,5 +1,5 @@
 import { getChatGPTUser } from "../../chatgpt-auth";
-import { checkAttemptLimit, createAccount, issueSession, normalizeUsername, revokeSession, validatePassword, verifyLogin } from "../../../lib/auth";
+import { AuthError, checkAttemptLimit, createAccount, issueSession, normalizeUsername, revokeSession, validatePassword, verifyLogin } from "../../../lib/auth";
 
 export async function POST(request: Request) {
   const origin = request.headers.get("Origin");
@@ -35,6 +35,7 @@ export async function POST(request: Request) {
     }
     return Response.json({ error: "操作无效" }, { status: 400 });
   } catch (error) {
-    return Response.json({ error: error instanceof Error ? error.message : "请稍后重试" }, { status: 400 });
+    return Response.json({ error: error instanceof AuthError ? error.message : "操作失败，请稍后再试" },
+      { status: error instanceof AuthError ? error.status : 500 });
   }
 }
