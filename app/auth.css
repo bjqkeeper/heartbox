@@ -18,3 +18,20 @@
 .auth-text-button { background:none; border:0; color:#a96248; cursor:pointer; margin-top:18px; padding:0; font-size:12px; }
 .auth-back { display:block; margin-top:25px; font-size:12px; color:#a96248; text-decoration:none; }
 @media(max-width:500px){.auth-card{margin-top:60px;padding:28px 22px}.auth-card h1{font-size:27px}}
+
+/* 入口延续星夜气氛，表单保持信纸般的阅读对比。 */
+.auth-site { position: relative; isolation: isolate; background: radial-gradient(circle at 78% 23%,#374564 0,#1a2948 28%,#101a34 69%); color:#f6ecdc; }
+.auth-site::before { content:""; position:absolute; inset:0; z-index:-1; pointer-events:none; background-image:radial-gradient(circle,#fff1c6 1px,transparent 2px),radial-gradient(circle,#cfddf4 1px,transparent 2px); background-size:170px 150px,230px 210px; background-position:20px 30px,90px 100px; opacity:.3; }
+.auth-brand { color:#f6ecdc; }
+.auth-brand span { background:#c9866d; box-shadow:0 0 20px #e7b07840; }
+.auth-card { position:relative; background:#fff8eb; border-color:#f2ddc4; box-shadow:0 28px 70px #080f27a3; color:#59485a; }
+.auth-card h1 { color:#493e54; }
+.auth-card p { color:#887b83; }
+.auth-switch { background:#eee2d8; }
+.auth-switch button.selected { background:#fffaf0; color:#98665e; }
+.auth-card input { border-color:#dccdc1; background:#fffefa; color:#493d4e; }
+.auth-card input:focus { border-color:#ba846f; box-shadow:0 0 0 3px #ba846f22; }
+.auth-submit { background:#be816a; color:#fff9ed; }
+.auth-submit:hover { background:#a96d5b; }
+.auth-card small { color:#998b91; }
+.auth-text-button,.auth-back { color:#9d6a63; }

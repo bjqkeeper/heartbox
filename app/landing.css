@@ -54,3 +54,65 @@
 .public-footer span { color: #b47358; font-weight: 700; }
 @media (max-width: 900px) { .public-hero { grid-template-columns: 1fr; padding-top: 45px; gap: 10px; } .public-art { min-height: 350px; } .orbit-one { width: 340px; height: 340px; } .orbit-two { width: 270px; height: 270px; } .public-steps { grid-template-columns: repeat(2,1fr); } }
 @media (max-width: 650px) { .public-header { height: 65px; padding: 0 20px; } .public-header nav { gap: 12px; } .public-header nav a:not(.public-login) { display: none; } .public-header nav .public-login { padding: 8px 11px; } .public-hero { padding: 56px 22px 65px; min-height: auto; } .public-hero h1 { font-size: clamp(35px,9vw,50px); } .public-hero h1 em { white-space: normal; } .public-hero-copy > p { font-size: 13px; } .public-art { min-height: 315px; } .orbit-one { width: 300px; height: 300px; } .orbit-two { width: 245px; height: 245px; } .art-letter { width: 240px; height: 170px; } .art-letter.front { padding-bottom: 20px; } .art-fold { width: 310px; height: 190px; left: -35px; top: -95px; } .art-stamp { top: 65px; } .art-letter.front strong { font-size: 16px; } .public-section { padding: 65px 22px; } .public-steps { gap: 10px; } .public-steps article { min-height: 180px; padding: 19px 15px; } .public-steps h3 { font-size: 14px; margin-top: 20px; } .public-steps p { font-size: 11px; } .public-privacy { grid-template-columns: 1fr; padding: 70px 22px; gap: 26px; } .public-footer { padding: 24px 22px; } }
+
+/* 星夜试版：动效只用于首页氛围，写信与收信页面保持安静。 */
+.public-site { background: #101a34; color: #f6eddf; overflow: hidden; }
+.public-header { position: relative; z-index: 2; border-bottom: 1px solid #f7e6cb12; }
+.public-brand { color: #f6ecdb; }
+.public-brand span { background: #c9866d; box-shadow: 0 0 22px #e8b27f40; }
+.public-header nav a { color: #c6c8d5; }
+.public-header nav a:hover { color: #f3d5a2; }
+.public-header nav .public-login { color: #f5d5a9; border-color: #e8c89573; background: #ffffff0b; }
+.public-header nav .public-login:hover { background: #ffffff17; }
+.public-hero { position: relative; isolation: isolate; min-height: 680px; padding-top: 72px; padding-bottom: 94px; background: radial-gradient(circle at 75% 40%, #394569 0, #202d4d 30%, #111d38 66%, #101a34 100%); }
+.public-hero::after { content: ""; position: absolute; inset: auto -10% -110px; height: 210px; background: radial-gradient(ellipse at 50% 0, #d4a37318, transparent 68%); pointer-events: none; }
+.public-hero-copy, .public-art { position: relative; z-index: 1; }
+.public-eyebrow { color: #e5bc85; }
+.public-hero h1 { color: #fcf3e4; text-shadow: 0 8px 30px #07112755; }
+.public-hero h1 em { color: #ebc995; }
+.public-hero-copy > p { color: #d5d2dc; }
+.public-hero-copy > small { color: #b3b8ca; }
+.public-primary { background: #cc8c6f; color: #1d2237; box-shadow: 0 10px 28px #0a0e2f50; }
+.public-primary:hover { background: #e5aa86; }
+.public-secondary { color: #f4ddba; border-color: #f5ddad70; background: #ffffff09; }
+.public-secondary:hover { background: #ffffff17; }
+.night-sky { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.night-star { position: absolute; z-index: 0; border-radius: 50%; background: #fff2ce; opacity: .27; box-shadow: 0 0 8px 2px #e9d09e88; animation: star-glimmer 7s ease-in-out infinite; }
+.night-star:nth-child(3n) { background: #d4e5ff; box-shadow: 0 0 11px 2px #a4c4ef88; }
+.night-moon { position: absolute; width: 310px; height: 310px; border-radius: 50%; top: 4%; right: 7%; background: radial-gradient(circle at 42% 37%, #fff6db 0, #f2d9ae 44%, #d9af83 78%); box-shadow: 0 0 65px 20px #eac9992e, 0 0 160px 55px #d7aa7620; opacity: .9; }
+.art-orbit.orbit-one { width: 470px; height: 470px; border-color: #e6cda444; }
+.art-orbit.orbit-two { width: 380px; height: 380px; background: radial-gradient(circle, #6e72813d, #caa88b14 58%, transparent 70%); }
+.art-letter { box-shadow: 0 27px 60px #060d2990; }
+.art-letter.back { background: #ae8e96; color: #f5e3d4; border: 1px solid #f5d4b35c; transform: translate(45px,-43px) rotate(10deg); }
+.art-letter.front { background: #fff9ea; border-color: #ffebd0; color: #594457; transform: translate(-32px,29px) rotate(-7deg); }
+.art-fold { background: #e9d2c6; }
+.art-stamp { background: #bc806c; box-shadow: 0 0 18px #e6aa8e75; }
+.art-letter.front small { color: #947b77; }
+.art-spark { color: #f7d9a0; text-shadow: 0 0 15px #fbdc9f; animation: star-glimmer 6s ease-in-out infinite; }
+.art-spark.two { animation-delay: 3s; }
+.night-fox { position: absolute; z-index: 4; width: 225px; right: -10px; bottom: 8px; filter: drop-shadow(0 15px 20px #08112c88); }
+.fox-breath { transform-origin: 48% 78%; animation: fox-breathe 5s ease-in-out infinite; }
+.fox-tail { transform-origin: 63% 77%; animation: fox-tail-sway 8s ease-in-out infinite; }
+.public-section { background: linear-gradient(180deg, #121f3b, #1b2945); border-top: 1px solid #edd8af1b; }
+.public-section-head h2, .public-privacy h2 { color: #f8eedf; }
+.public-steps article { background: #ffffff0d; border-color: #e9d6bd30; box-shadow: 0 16px 30px #0b132530; }
+.public-steps article:nth-child(even) { transform: translateY(18px); }
+.public-steps article > span { color: #e3bf88; }
+.public-steps h3 { color: #f8eedf; }
+.public-steps p { color: #bfc5d1; }
+.public-privacy { position: relative; }
+.public-privacy::before { content: "✦"; position: absolute; color: #ebd099; font-size: 32px; left: 47%; top: 18%; opacity: .6; text-shadow: 0 0 26px #e6c887; }
+.public-privacy p { color: #c3c7d3; }
+.public-privacy a { color: #f1ce9c; }
+.privacy-card { background: linear-gradient(150deg, #fff1da, #dfc2ae); border-color: #f7e6cf; color: #58485b; box-shadow: 0 25px 55px #060e2980; transform: rotate(3deg); }
+.privacy-card span { background: #fffaef; color: #a46e64; }
+.privacy-card small { color: #8d6f73; }
+.public-footer { border-color: #edd8af22; color: #aeb5c6; }
+.public-footer span { color: #e4c091; }
+.public-site a:focus-visible { outline: 2px solid #f5d291; outline-offset: 4px; }
+@keyframes star-glimmer { 0%, 100% { opacity: .22; transform: scale(.75); } 50% { opacity: .88; transform: scale(1.3); } }
+@keyframes fox-breathe { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(1.025); } }
+@keyframes fox-tail-sway { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(3deg); } }
+@media (max-width: 900px) { .public-hero { gap: 0; } .night-moon { right: 18%; top: 7%; } .night-fox { right: 9%; } }
+@media (max-width: 650px) { .public-hero { padding-top: 52px; padding-bottom: 55px; } .public-art { min-height: 350px; } .night-moon { width: 220px; height: 220px; right: 12%; top: 5%; } .art-orbit.orbit-one { width: 300px; height: 300px; } .art-orbit.orbit-two { width: 245px; height: 245px; } .night-fox { width: 164px; right: 0; bottom: 0; } .public-steps article:nth-child(even) { transform: none; } .privacy-card { transform: rotate(1deg); } .public-privacy::before { left: 80%; top: 10%; } }
+@media (prefers-reduced-motion: reduce) { .public-site *, .public-site *::before, .public-site *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; } }
