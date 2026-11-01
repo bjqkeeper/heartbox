@@ -193,6 +193,38 @@ export async function updateGroup(user: ChatGPTUser, input: Record<string, unkno
   return { groupId };
 }
 
+export async function renameGroup(user: ChatGPTUser, input: Record<string, unknown>) {
+  const db = database();
+  const groupId = String(input.groupId ?? "");
+  const name = cleanName(input.name);
+  const result = await db.prepare(`UPDATE groups SET name = ?, updated_at = ?
+    WHERE id = ? AND owner_id = ?`)
+    .bind(name, Date.now(), groupId, user.userId).run();
+  if (!result.meta.changes) throw new AppError("只有建组人能重命名空间", 403);
+  return { groupId, name };
+}
+
+export async function deleteGroup(user: ChatGPTUser, input: Record<string, unknown>) {
+  const db = database();
+  const groupId = String(input.groupId ?? "");
+  const confirmedName = String(input.confirmName ?? "").trim();
+  const group = await db.prepare(`SELECT name FROM groups WHERE id = ? AND owner_id = ?`)
+    .bind(groupId, user.userId).first<{ name: string }>();
+  if (!group) throw new AppError("只有建组人能删除空间", 403);
+  if (confirmedName !== group.name) throw new AppError("请输入当前空间名称以确认删除");
+  const allowed = `SELECT id FROM groups WHERE id = ? AND owner_id = ? AND name = ?`;
+  const results = await db.batch([
+    db.prepare(`DELETE FROM letters WHERE group_id IN (${allowed})`)
+      .bind(groupId, user.userId, confirmedName),
+    db.prepare(`DELETE FROM memberships WHERE group_id IN (${allowed})`)
+      .bind(groupId, user.userId, confirmedName),
+    db.prepare(`DELETE FROM groups WHERE id = ? AND owner_id = ? AND name = ?`)
+      .bind(groupId, user.userId, confirmedName),
+  ]);
+  if (!results[2].meta.changes) throw new AppError("空间名称已变化，请刷新后重试");
+  return { deletedGroupId: groupId };
+}
+
 export async function sendLetter(user: ChatGPTUser, input: Record<string, unknown>) {
   const db = database();
   const groupId = String(input.groupId ?? "");

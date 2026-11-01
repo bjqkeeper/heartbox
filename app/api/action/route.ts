@@ -1,5 +1,5 @@
 import { getChatGPTUser } from "../../chatgpt-auth";
-import { AppError, createGroup, joinGroup, respondToLetter, sendLetter, updateGroup } from "../../../lib/heartbox";
+import { AppError, createGroup, deleteGroup, joinGroup, renameGroup, respondToLetter, sendLetter, updateGroup } from "../../../lib/heartbox";
 
 export async function POST(request: Request) {
   const user = await getChatGPTUser();
@@ -13,6 +13,8 @@ export async function POST(request: Request) {
     const result = input.action === "createGroup" ? await createGroup(user, input)
       : input.action === "joinGroup" ? await joinGroup(user, input)
       : input.action === "updateGroup" ? await updateGroup(user, input)
+      : input.action === "renameGroup" ? await renameGroup(user, input)
+      : input.action === "deleteGroup" ? await deleteGroup(user, input)
       : input.action === "sendLetter" ? await sendLetter(user, input)
       : input.action === "respond" ? await respondToLetter(user, input)
       : null;

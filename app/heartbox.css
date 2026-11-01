@@ -142,6 +142,25 @@ button { cursor: pointer; }
 .invite small { display: block; color: #b0856a; font-size: 10px; margin-top: 8px; }
 .invite button { white-space: nowrap; background: #f9eee3; color: #a4674d; border: 1px dashed #d9b49b; border-radius: 8px; padding: 10px 13px; font-size: 12px; letter-spacing: .12em; }
 .invite button span { font-size: 10px; letter-spacing: 0; margin-left: 7px; }
+.manage { margin-top: 19px; padding: 26px; }
+.manage h3 { font-size: 16px; margin: 0 0 6px; }
+.manage > p { color: #a3978b; font-size: 11px; margin: 0 0 22px; }
+.manage > label { display: block; font-size: 11px; font-weight: 700; margin-bottom: 9px; }
+.rename-row { display: flex; gap: 10px; }
+.rename-row input { min-width: 0; flex: 1; border: 1px solid #e7dcd0; border-radius: 9px; background: #fffdfa; color: #4b433b; padding: 9px 11px; }
+.rename-row input:focus { outline: none; border-color: #c4886e; box-shadow: 0 0 0 3px #c4886e1c; }
+.rename-row button { white-space: nowrap; }
+.rename-row button:disabled { opacity: .5; cursor: not-allowed; }
+.danger-row { margin-top: 27px; padding-top: 22px; border-top: 1px solid #f0e7de; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+.danger-row strong { display: block; font-size: 12px; color: #6d554c; }
+.danger-row small { display: block; margin-top: 5px; color: #a3978b; font-size: 10px; line-height: 1.6; }
+.danger-button, .danger-submit { border: 1px solid #b96655; border-radius: 9px; background: #fff6f3; color: #b05345; padding: 10px 15px; font-size: 12px; font-weight: 700; white-space: nowrap; }
+.danger-button:hover { background: #fae8e3; }
+.danger-icon { background: #fae9e4; color: #b95b4b; }
+.danger-submit { width: 100%; background: #b95b4b; color: #fff; margin-top: 4px; }
+.danger-submit:hover { background: #a94c3e; }
+.danger-submit:disabled { opacity: .48; cursor: not-allowed; }
+.cancel-delete { width: 100%; margin-top: 8px; background: transparent; border: 0; color: #867b71; font-size: 12px; padding: 9px; }
 .welcome { max-width: 680px; margin: 55px auto; padding: 50px 30px; text-align: center; }
 .welcome-icon { width: 92px; height: 92px; margin: 0 auto 31px; display: grid; place-items: center; border-radius: 26px; background: #f7e9dd; color: #b9775b; font-size: 53px; transform: rotate(-8deg); box-shadow: 0 18px 30px #b8816030; }
 .welcome h1 { font-size: clamp(36px,5vw,56px); margin: 19px 0; }
@@ -158,3 +177,4 @@ button { cursor: pointer; }
 .modal .primary { width: 100%; margin-top: 5px; }
 @media (max-width: 900px) { .workspace { grid-template-columns: 200px minmax(0,1fr); } .main { padding: 35px 30px 65px; } .compose-layout { grid-template-columns: 1fr; } .guide { display: none; } }
 @media (max-width: 650px) { .topbar { height: 65px; padding: 0 18px; } .brand small, .privacy { display: none; } .workspace { display: block; } .sidebar { padding: 12px 16px; border-right: 0; border-bottom: 1px solid #ede7dd; display: block; } .sidebar-heading, .sidebar-quote { display: none; } .group-list { display: flex; overflow-x: auto; gap: 5px; } .group-item { width: auto; flex: none; padding: 6px 10px; } .group-item small { display: none; } .group-icon { width: 29px; height: 29px; font-size: 17px; } .group-item strong { font-size: 11px; max-width: 95px; } .sidebar-action { display: inline-block; padding: 6px 10px; font-size: 11px; } .group-list + .sidebar-action { margin-top: 4px; } .main { padding: 31px 18px 55px; } .intro { align-items: flex-start; } .intro h1 { font-size: 32px; } .release-chip { min-width: auto; padding: 9px 10px; } .release-chip > span { display: none; } .release-chip strong { font-size: 10px; } .tabs { gap: 23px; margin-bottom: 27px; } .tabs button { font-size: 11px; } .section-head h2 { font-size: 23px; } .letter-header { gap: 10px; padding: 16px 13px; } .letter-symbol { width: 38px; height: 38px; font-size: 21px; } .letter-heading strong { font-size: 12px; } .letter-heading small { font-size: 10px; } .state { font-size: 9px; padding: 4px 7px; } .arrow { display: none; } .opened { padding: 15px; } .compose { padding: 20px; } .compose-bottom { align-items: stretch; flex-direction: column; } .scores { gap: 9px; } .score-card { padding: 18px; } .settings { padding: 20px; } .settings-grid { gap: 13px; } .point-settings > div { gap: 12px; } .invite { align-items: flex-start; flex-direction: column; } .notice { right: 12px; left: 12px; top: 75px; } }
+@media (max-width: 650px) { .manage { padding: 20px; } .rename-row { flex-direction: column; } .danger-row { align-items: flex-start; } .danger-button { padding: 9px 10px; } }
