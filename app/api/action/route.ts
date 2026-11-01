@@ -1,8 +1,8 @@
-import { getChatGPTUser } from "../../chatgpt-auth";
+import { getCurrentUser } from "../../../lib/auth";
 import { AppError, createGroup, deleteGroup, joinGroup, renameGroup, respondToLetter, sendLetter, updateGroup } from "../../../lib/heartbox";
 
 export async function POST(request: Request) {
-  const user = await getChatGPTUser();
+  const user = await getCurrentUser();
   if (!user) return Response.json({ error: "请先登录" }, { status: 401 });
   const origin = request.headers.get("Origin");
   if (origin && origin !== new URL(request.url).origin) {

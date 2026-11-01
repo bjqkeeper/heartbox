@@ -14,7 +14,7 @@ export type Group = {
   anonymous: number; createdAt: number; memberCount: number;
 };
 
-type Member = { userId: string; displayName: string; email: string };
+type Member = { userId: string; displayName: string };
 type LetterRow = {
   id: string; body: string; createdAt: number; unlockAt: number;
   response: string | null; scoreAwarded: number | null; respondedAt: number | null;
@@ -103,7 +103,7 @@ export async function getDashboard(user: ChatGPTUser, requestedGroupId?: string 
     members: [], inbox: [], sent: [], points: { period: 0, total: 0 } };
 
   const [membersResult, inboxResult, sentResult, pointsResult] = await Promise.all([
-    db.prepare(`SELECT user_id AS userId, display_name AS displayName, email
+    db.prepare(`SELECT user_id AS userId, display_name AS displayName
       FROM memberships WHERE group_id = ? ORDER BY joined_at`).bind(selected.id).all<Member>(),
     db.prepare(`SELECT l.id, l.body, l.created_at AS createdAt, l.unlock_at AS unlockAt,
       l.response, l.score_awarded AS scoreAwarded, l.responded_at AS respondedAt,
@@ -141,6 +141,9 @@ export async function createGroup(user: ChatGPTUser, input: Record<string, unkno
   const db = database();
   const name = cleanName(input.name);
   const kind = input.kind === "couple" ? "couple" : "friends";
+  const count = await db.prepare(`SELECT COUNT(*) AS n FROM groups WHERE owner_id = ?`)
+    .bind(user.userId).first<{ n: number }>();
+  if ((count?.n ?? 0) >= 10) throw new AppError("每位用户最多创建 10 个空间");
   const now = Date.now();
   const id = crypto.randomUUID();
   const inviteCode = Array.from(crypto.getRandomValues(new Uint8Array(8)),
