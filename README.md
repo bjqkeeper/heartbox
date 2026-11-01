@@ -25,6 +25,22 @@
 - 如果将来改为中国大陆服务器和自有域名，不能只更换 DNS 或上传静态网页：需要让服务端代码适配新的运行环境，迁移数据库中的账号、空间、信件和积分，并验证登录、解封、权限与定时规则。
 - 正式切换前应确认当前托管数据的导出方式，做好备份与迁移核对，并按新接入服务商的要求处理域名和备案。现有网站可在迁移验证期间保留作为旧入口。
 
+### 部署到自己的 Cloudflare Workers
+
+1. 在 Cloudflare D1 中创建名为 `heartbox-db` 的数据库，复制它的数据库 ID。新数据库与当前 Sites 网站的数据相互独立。
+2. 在新数据库中依次执行 `drizzle/0000_foamy_mentor.sql` 和 `drizzle/0001_melodic_frank_castle.sql`，建好表后再部署。可在本地登录 Wrangler 后运行：
+
+   ```bash
+   npx wrangler d1 execute heartbox-db --remote --file=drizzle/0000_foamy_mentor.sql
+   npx wrangler d1 execute heartbox-db --remote --file=drizzle/0001_melodic_frank_castle.sql
+   ```
+
+3. 在 Workers & Pages 中选择 **创建 Worker → 连接 GitHub**，选择 `bjqkeeper/heartbox`。仓库根目录就是项目根目录，根目录设置留空。
+4. 项目名称填 `heartbox`，构建命令填 `npm run build`，部署命令填 `npm run deploy:cloudflare`。
+5. 在构建变量中添加 `CLOUDFLARE_D1_DATABASE_ID`，值为第 1 步复制的数据库 ID。如果数据库没有命名为 `heartbox-db`，再添加 `CLOUDFLARE_D1_DATABASE_NAME`。这些是 **构建变量**，不是运行时密钥。部署后用新网址测试注册、登录和创建空间。
+
+不要把现有 Sites 数据库当作新数据库；若需要保留旧账号或信件，必须先导出并迁移数据。
+
 ## 权限规则
 
 `/api/dashboard` 仅查询当前用户所在的组。收件箱只查询当前用户为收信人的信，未解封时响应中不包含正文。寄件箱只查询当前用户写的信。投递和回应都在服务端检查组成员、收信人及解封时间。建组人只能改设置，不能查看其他成员的信。
