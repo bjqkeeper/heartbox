@@ -233,7 +233,7 @@ export async function sendLetter(user: ChatGPTUser, input: Record<string, unknow
   const groupId = String(input.groupId ?? "");
   const recipientId = String(input.recipientId ?? "");
   const body = String(input.body ?? "").trim();
-  if (body.length < 5 || body.length > 1500) throw new AppError("信件内容需要 5 到 1500 个字");
+  if (body.length < 5 || body.length > 500) throw new AppError("信件内容需要 5 到 500 个字");
   if (recipientId === user.userId) throw new AppError("请选择其他成员作为收信人");
   const group = await db.prepare(`SELECT g.*, 
     EXISTS(SELECT 1 FROM memberships WHERE group_id = g.id AND user_id = ?) AS sender_member,
