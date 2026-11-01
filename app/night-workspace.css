@@ -1,0 +1,85 @@
+/* The workspace shares the evening palette, while letters stay on light paper. */
+.shell {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 100vh;
+  background: radial-gradient(circle at 78% 18%, #334260 0, #1b2947 32%, #101a34 78%);
+  color: #f4ecdf;
+  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+}
+.shell > .night-sky { position: fixed; inset: 0; z-index: -1; }
+.shell .topbar, .shell .workspace { position: relative; z-index: 1; }
+.shell .topbar { background: #121d37d9; border-bottom: 1px solid #e5cda32e; }
+.shell .logo { background: #c8886f; color: #fffaf1; box-shadow: 0 5px 20px #d39e7440; }
+.shell .brand strong { font-weight: 600; color: #f7eee1; }
+.shell .brand small, .shell .privacy { color: #b9bfd1; }
+.shell .privacy i { background: #d7c49c; }
+.shell .avatar { background: #e9d3b6; color: #694e58; }
+.shell .account-link { color: #e9c79c; }
+.shell .sidebar { background: #14203bdb; border-color: #e4cda324; }
+.shell .sidebar-heading { color: #aeb8cc; font-weight: 500; }
+.shell .group-item { color: #d7d9e2; }
+.shell .group-item:hover, .shell .group-item.active { background: #f4dfbf1c; }
+.shell .group-item.active { color: #f2d6aa; }
+.shell .group-icon { background: #f4ddba1a; border-color: #e1c29354; color: #f0cd9d; }
+.shell .group-item small { color: #a8b1c5; }
+.shell .sidebar-action { color: #e7c9a8; }
+.shell .sidebar-action:hover { background: #f4dfbf1c; }
+.sidebar-mascot { position: relative; margin-top: auto; min-height: 154px; border-top: 1px solid #e4cda324; }
+.sidebar-mascot .night-fox { position: absolute; width: 185px; left: 0; bottom: 1px; filter: drop-shadow(0 10px 12px #07122988); }
+.sidebar-mascot span { position: absolute; top: 15px; right: 14px; color: #e8c898; letter-spacing: 8px; opacity: .75; }
+.shell .main { min-height: calc(100vh - 76px); }
+.shell .eyebrow { color: #e1bf90; font-weight: 500; letter-spacing: .08em; }
+.shell .intro h1, .shell .welcome h1, .shell .section-head h2, .shell .empty h3,
+.shell .guide h3, .shell .modal h2 {
+  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  font-weight: 500;
+  letter-spacing: .01em;
+}
+.shell .intro h1, .shell .welcome h1 { color: #fbf1e4; }
+.shell .intro h1 span { color: #e7c894; }
+.shell .intro p, .shell .section-head p, .shell .count { color: #b7bfd0; }
+.shell .release-chip { background: #f7ebd9; border-color: #f4ddbb; color: #845d63; }
+.shell .release-chip small { color: #8e8083; }
+.shell .tabs { border-color: #ead4af3d; }
+.shell .tabs button { color: #b5bdd0; font-weight: 400; }
+.shell .tabs button:hover, .shell .tabs button.active { color: #f1d1a5; }
+.shell .tabs button.active { border-bottom-color: #e1b983; font-weight: 600; }
+.shell .tabs b { background: #c6856e; }
+.shell .section-head h2 { color: #f8efe2; }
+.shell .empty { background: #fff9ed; border-color: #ead5b8; color: #544c58; }
+.shell .empty > div { background: #f1e4d7; color: #ad756e; }
+.shell .empty p { color: #8d8084; }
+.shell .letter, .shell .card, .shell .score-card { background: #fff9ee; border-color: #e8d9c8; color: #534a55; box-shadow: 0 16px 35px #09132b3d; }
+.shell .letter-symbol { background: #f2e2d5; color: #b37869; }
+.shell .letter-symbol.sealed { background: #ece8e4; color: #918c93; }
+.shell .paper { background: #f5ecdf; }
+.shell .guide { background: #f2e7db; }
+.shell .guide h3, .shell .settings h3, .shell .invite h3, .shell .manage h3 { color: #564a57; font-weight: 600; }
+.shell .score-card.current { background: #f1e2d2; }
+.shell .notice { background: #fff7e8; }
+.shell .modal-backdrop { background: #080f24b8; }
+.shell .modal { background: #fff9ee; }
+.shell .modal h2 { color: #554b57; }
+.shell .welcome { position: relative; }
+.shell .welcome-icon { background: #f2d9bb; color: #a76d68; }
+.shell .welcome h1 em { color: #ebc493; }
+.shell .welcome p { color: #bfc4d0; }
+.shell .welcome .secondary { border-color: #ddc29e; color: #f2d6ad; }
+.shell .welcome .secondary:hover { background: #ffffff14; }
+.shell .intro > .night-fox { display: none; }
+.shell :is(button, input, select, textarea):focus-visible { outline: 2px solid #d9b684; outline-offset: 2px; }
+@media (max-width: 650px) {
+  .shell .sidebar { background: #14203bdf; border-bottom-color: #e4cda324; }
+  .shell .main { min-height: calc(100vh - 130px); }
+  .sidebar-mascot { display: none; }
+  .shell .intro { position: relative; padding-right: 45px; }
+  .shell .intro > .night-fox { display: block; position: absolute; width: 94px; right: -13px; top: -10px; }
+  .shell .intro h1 { font-size: 29px; }
+  .shell .intro p { font-size: 11px; }
+  .shell .release-chip { align-self: flex-end; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .shell .night-star, .shell .fox-breath, .shell .fox-tail { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+}

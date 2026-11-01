@@ -4,6 +4,7 @@
 @import "./heartbox.css";
 @import "./landing.css";
 @import "./auth.css";
+@import "./night-workspace.css";
 
 @utility scrollbar-thin {
   scrollbar-width: thin;

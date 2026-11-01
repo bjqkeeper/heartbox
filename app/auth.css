@@ -35,3 +35,5 @@
 .auth-submit:hover { background:#a96d5b; }
 .auth-card small { color:#998b91; }
 .auth-text-button,.auth-back { color:#9d6a63; }
+.auth-site { font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Noto Sans CJK SC",sans-serif; }
+.auth-card h1 { font-family:inherit; font-weight:500; letter-spacing:.01em; }

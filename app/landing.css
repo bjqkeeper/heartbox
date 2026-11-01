@@ -90,7 +90,7 @@
 .art-letter.front small { color: #947b77; }
 .art-spark { color: #f7d9a0; text-shadow: 0 0 15px #fbdc9f; animation: star-glimmer 6s ease-in-out infinite; }
 .art-spark.two { animation-delay: 3s; }
-.night-fox { position: absolute; z-index: 4; width: 225px; right: -10px; bottom: 8px; filter: drop-shadow(0 15px 20px #08112c88); }
+.night-fox { position: absolute; z-index: 4; width: 250px; right: -12px; bottom: 5px; filter: drop-shadow(0 15px 20px #08112c88); }
 .fox-breath { transform-origin: 48% 78%; animation: fox-breathe 5s ease-in-out infinite; }
 .fox-tail { transform-origin: 63% 77%; animation: fox-tail-sway 8s ease-in-out infinite; }
 .public-section { background: linear-gradient(180deg, #121f3b, #1b2945); border-top: 1px solid #edd8af1b; }
@@ -114,5 +114,16 @@
 @keyframes fox-breathe { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(1.025); } }
 @keyframes fox-tail-sway { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(3deg); } }
 @media (max-width: 900px) { .public-hero { gap: 0; } .night-moon { right: 18%; top: 7%; } .night-fox { right: 9%; } }
-@media (max-width: 650px) { .public-hero { padding-top: 52px; padding-bottom: 55px; } .public-art { min-height: 350px; } .night-moon { width: 220px; height: 220px; right: 12%; top: 5%; } .art-orbit.orbit-one { width: 300px; height: 300px; } .art-orbit.orbit-two { width: 245px; height: 245px; } .night-fox { width: 164px; right: 0; bottom: 0; } .public-steps article:nth-child(even) { transform: none; } .privacy-card { transform: rotate(1deg); } .public-privacy::before { left: 80%; top: 10%; } }
+@media (max-width: 650px) { .public-hero { padding-top: 52px; padding-bottom: 55px; } .public-art { min-height: 350px; } .night-moon { width: 220px; height: 220px; right: 12%; top: 5%; } .art-orbit.orbit-one { width: 300px; height: 300px; } .art-orbit.orbit-two { width: 245px; height: 245px; } .public-art .night-fox { width: 183px; right: 0; bottom: 0; } .public-steps article:nth-child(even) { transform: none; } .privacy-card { transform: rotate(1deg); } .public-privacy::before { left: 80%; top: 10%; } }
 @media (prefers-reduced-motion: reduce) { .public-site *, .public-site *::before, .public-site *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; } }
+
+/* A quieter, softer type treatment across the public pages. */
+.public-site { font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; }
+.public-hero h1, .public-section h2, .public-privacy h2, .art-letter.front strong, .privacy-card strong {
+  font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  font-weight: 500;
+  letter-spacing: .005em;
+}
+.public-hero h1 { font-size: clamp(40px, 4.7vw, 62px); line-height: 1.35; }
+.public-section-head h2, .public-privacy h2 { font-weight: 500; }
+.public-eyebrow { font-weight: 500; letter-spacing: .1em; }
