@@ -26,6 +26,7 @@
 .shell .group-item small { color: #a8b1c5; }
 .shell .sidebar-action { color: #e7c9a8; }
 .shell .sidebar-action:hover { background: #f4dfbf1c; }
+.shell .sidebar-guide { display: block; text-decoration: none; }
 .sidebar-mascot { position: relative; margin-top: auto; min-height: 154px; border-top: 1px solid #e4cda324; }
 .sidebar-mascot .night-fox { position: absolute; width: 185px; left: 0; bottom: 1px; filter: drop-shadow(0 10px 12px #07122988); }
 .sidebar-mascot span { position: absolute; top: 15px; right: 14px; color: #e8c898; letter-spacing: 8px; opacity: .75; }

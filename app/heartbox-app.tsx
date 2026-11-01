@@ -93,6 +93,7 @@ export default function HeartboxApp({ displayName, authKind }: { displayName: st
       <div className="group-list">{data?.groups.map((item) => <button key={item.id} className={"group-item " + (item.id === group?.id ? "active" : "")} onClick={() => { setGroupId(item.id); setTab("inbox"); setExpanded(null); }}><span className="group-icon">{item.kind === "couple" ? "♡" : "✦"}</span><span><strong>{item.name}</strong><small>{item.kind === "couple" ? "双人空间" : "朋友空间"} · {item.memberCount} 人</small></span></button>)}</div>
       <button className="sidebar-action" onClick={() => setModal("create")}>＋ 创建空间</button>
       <button className="sidebar-action" onClick={() => setModal("join")}>↗ 加入空间</button>
+      <a className="sidebar-action sidebar-guide" href="/guide">? 使用与规则</a>
       <div className="sidebar-mascot"><SleepingFox /><span>✦ ✧</span></div>
     </aside>
     <main className="main">
